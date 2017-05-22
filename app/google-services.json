@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1082206941710",
+    "firebase_url": "https://ske-blog.firebaseio.com",
+    "project_id": "ske-blog",
+    "storage_bucket": "ske-blog.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082206941710:android:e3aad794d819bcd1",
+        "android_client_info": {
+          "package_name": "com.example.lunatic.ske_blog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082206941710-2pgdp7b0j29pplu5vtf6bpf5qcp6sipj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lunatic.ske_blog",
+            "certificate_hash": "9517cd2542a1c23ac62dfe5ac82a1dd25204420a"
+          }
+        },
+        {
+          "client_id": "1082206941710-tlrmu3b20g79nd9k9vu88qkfc6i53drm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQ-Wy4HsXhvgl1zRpTiLfDGSeQlvSZMOw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082206941710-tlrmu3b20g79nd9k9vu88qkfc6i53drm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
