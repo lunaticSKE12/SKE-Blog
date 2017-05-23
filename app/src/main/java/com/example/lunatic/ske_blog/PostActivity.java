@@ -34,7 +34,7 @@ public class PostActivity extends AppCompatActivity {
 	private Uri mImageUri = null;
 	private StorageReference mStorage;
 	private ProgressDialog mProgress;
-	private String random;
+	private static final int MAX_LENGTH = 50;
 
 	private static final int GALLERY_REQUEST = 1;
 
@@ -52,7 +52,7 @@ public class PostActivity extends AppCompatActivity {
 		mStorage = FirebaseStorage.getInstance().getReference();
 		mSelectImage = (ImageButton) findViewById(R.id.imageSelect);
 		mPostTitle = (EditText) findViewById(R.id.titleField);
-		mPosrDesc = (EditText) findViewById(R.id.titleField);
+		mPosrDesc = (EditText) findViewById(R.id.descField);
 		mSubmitBtn = (Button) findViewById(R.id.summitBtn);
 		mProgress = new ProgressDialog(this);
 
@@ -125,7 +125,7 @@ public class PostActivity extends AppCompatActivity {
 	public static String random() {
 		Random generator = new Random();
 		StringBuilder randomStringBuilder = new StringBuilder();
-		int randomLength = generator.nextInt(20);
+		int randomLength = generator.nextInt(MAX_LENGTH);
 		char tempChar;
 		for (int i = 0; i < randomLength; i++) {
 			tempChar = (char) (generator.nextInt(96) + 32);
