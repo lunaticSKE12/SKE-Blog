@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 	private EditText mLoginEmailField;
 	private EditText mLoginPasswordField;
 	private Button mLoginBtn;
+	private Button mNewAccountBtn;
 
 	private FirebaseAuth mAuth;
 	private DatabaseReference mDatabaseUsers;
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 		mLoginEmailField = (EditText) findViewById(R.id.loginEmailField);
 		mLoginPasswordField = (EditText) findViewById(R.id.loginPasswordField);
 		mLoginBtn = (Button) findViewById(R.id.loginBtn);
+		mNewAccountBtn = (Button) findViewById(R.id.newAccountBtn);
 
 		mLoginBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -79,6 +81,19 @@ public class LoginActivity extends AppCompatActivity {
 
 			}
 		});
+
+		mNewAccountBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				Intent regieIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+				regieIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(regieIntent);
+			}
+		});
+
+
+
 
 
 		// Google sign in

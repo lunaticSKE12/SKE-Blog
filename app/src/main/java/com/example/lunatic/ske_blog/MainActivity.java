@@ -64,8 +64,15 @@ public class MainActivity extends AppCompatActivity {
 
 		mDatabase = FirebaseDatabase.getInstance().getReference().child("blog");
 		mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+
 		mDatabaseUsers.keepSynced(true);
+		mDatabase.keepSynced(true);
+
 		mBlogList = (RecyclerView) findViewById(R.id.blog_list);
+		LinearLayoutManager layoutManager =new LinearLayoutManager(this);
+		layoutManager.setReverseLayout(true);
+		layoutManager.setStackFromEnd(true);
+
 		mBlogList.setHasFixedSize(true);
 		mBlogList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -97,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 						viewHolder.setTitle(model.getTitle());
 						viewHolder.setDesc(model.getDesc());
 						viewHolder.setImage(getApplicationContext(), model.getImage());
+						viewHolder.setUsername(model.getUsername());
 
 					}
 				};
@@ -166,6 +174,16 @@ public class MainActivity extends AppCompatActivity {
 
 			TextView post_desc = (TextView) mView.findViewById(R.id.post_desc);
 			post_desc.setText(desc);
+		}
+
+		/**
+		 * set username of post
+		 * @param username
+		 */
+		public void setUsername(String username){
+			TextView post_usename = (TextView) mView.findViewById(R.id.post_username);
+			post_usename.setText(username);
+
 		}
 
 		/**

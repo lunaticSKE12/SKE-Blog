@@ -10,6 +10,7 @@ public class Blog {
 	private  String title;
 	private String desc;
 	private String image;
+	private String username;
 
 	public Blog(){
 
@@ -21,10 +22,11 @@ public class Blog {
 	 * @param desc description of blog
 	 * @param image image of blog
 	 */
-	public Blog(String title, String desc, String image) {
+	public Blog(String title, String desc, String image, String username) {
 		this.title = title;
 		this.desc = desc;
 		this.image = image;
+		this.username = username;
 	}
 
 	/**
@@ -72,5 +74,21 @@ public class Blog {
 	 */
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	/**
+	 * get username
+	 * @return username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * set username
+	 * @param username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }
