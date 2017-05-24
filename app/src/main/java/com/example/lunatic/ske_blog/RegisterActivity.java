@@ -20,6 +20,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * RegisterActivity register page
+ * @author napong dungduangsasitorn
+ */
 public class RegisterActivity extends AppCompatActivity {
 
 	private EditText mNameField;
@@ -32,6 +36,10 @@ public class RegisterActivity extends AppCompatActivity {
 	private ProgressDialog mProgress;
 
 
+	/**
+	 * onCreate create register page
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,6 +66,9 @@ public class RegisterActivity extends AppCompatActivity {
 
 	}
 
+	/**
+	 * startRegister send data to check user exist and register to database.
+	 */
 	private void startRegister() {
 		final String  name = mNameField.getText().toString().trim();
 		String email = mEmailField.getText().toString().trim();

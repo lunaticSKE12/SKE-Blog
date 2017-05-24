@@ -84,6 +84,7 @@ public class PostActivity extends AppCompatActivity {
 
 	/**
 	 * startPosting post to blog
+	 * send data of post to database.
 	 */
 	private void startPosting() {
 

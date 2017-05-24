@@ -1,5 +1,6 @@
 package com.example.lunatic.ske_blog;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * login activity
+ *
+ * @author napong dungduangsasitorn
+ */
 public class LoginActivity extends AppCompatActivity {
 
 	private EditText mLoginEmailField;
@@ -27,15 +33,22 @@ public class LoginActivity extends AppCompatActivity {
 	private Button mLoginBtn;
 
 	private FirebaseAuth mAuth;
-	private DatabaseReference mDatabase;
+	private DatabaseReference mDatabaseUsers;
+	private ProgressDialog mProgress;
 
+	/**
+	 * create login page
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 
 		mAuth = FirebaseAuth.getInstance();
-		mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+		mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+		mDatabaseUsers.keepSynced(true);
+		mProgress = new ProgressDialog(this);
 
 		mLoginEmailField = (EditText) findViewById(R.id.loginEmailField);
 		mLoginPasswordField = (EditText) findViewById(R.id.loginPasswordField);
@@ -51,20 +64,28 @@ public class LoginActivity extends AppCompatActivity {
 
 	}
 
+	/**
+	 * checkLogin check log in from database
+	 */
 	private void checkLogin() {
 
 		String email = mLoginEmailField.getText().toString().trim();
 		String password = mLoginPasswordField.getText().toString().trim();
 
 		if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
+			mProgress.setMessage("Checking Login");
+			mProgress.show();
+
 			mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 				@Override
 				public void onComplete(@NonNull Task<AuthResult> task) {
 					if(task.isSuccessful()){
 
+						mProgress.dismiss();
 						checkUserExist();
 
 					}else{
+						mProgress.dismiss();
 						Toast.makeText(LoginActivity.this, "Error Login", Toast.LENGTH_LONG).show();
 					}
 
@@ -74,9 +95,12 @@ public class LoginActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * checkUserExist check user exist in database
+	 */
 	private void checkUserExist() {
 		final String user_id = mAuth.getCurrentUser().getUid();
-		mDatabase.addValueEventListener(new ValueEventListener() {
+		mDatabaseUsers.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot dataSnapshot) {
 				if(dataSnapshot.hasChild(user_id)){
@@ -86,6 +110,9 @@ public class LoginActivity extends AppCompatActivity {
 
 				}else{
 					Toast.makeText(LoginActivity.this, "You need to setup your account.", Toast.LENGTH_LONG).show();
+					Intent setupIntent = new Intent(LoginActivity.this, SetupActivity.class);
+					setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(setupIntent);
 				}
 			}
 

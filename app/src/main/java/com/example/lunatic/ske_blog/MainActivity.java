@@ -12,11 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mBlogList;
 	private DatabaseReference mDatabase;
+	private DatabaseReference mDatabaseUsers;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -56,15 +61,22 @@ public class MainActivity extends AppCompatActivity {
 		};
 
 		mDatabase = FirebaseDatabase.getInstance().getReference().child("blog");
+		mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+		mDatabaseUsers.keepSynced(true);
         mBlogList = (RecyclerView) findViewById(R.id.blog_list);
         mBlogList.setHasFixedSize(true);
         mBlogList.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
-    @Override
+	/**
+	 * onStart set start
+	 */
+	@Override
     protected void onStart(){
         super.onStart();
+
+		checkUserExist();
 
 		mAuth.addAuthStateListener(mAuthListener);
 
@@ -89,7 +101,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static class BlogViewHolder extends RecyclerView.ViewHolder{
+	/**
+	 * checkUserExist check user exist in database
+	 */
+	private void checkUserExist() {
+		final String user_id = mAuth.getCurrentUser().getUid();
+		mDatabaseUsers.addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(DataSnapshot dataSnapshot) {
+				if(!dataSnapshot.hasChild(user_id)){
+					Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+					setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(setupIntent);
+
+				}
+			}
+
+			@Override
+			public void onCancelled(DatabaseError databaseError) {
+
+			}
+		});
+	}
+
+	/**
+	 * BlogViewHolder set view in blog page
+	 */
+	public static class BlogViewHolder extends RecyclerView.ViewHolder{
 
 		View mView;
 
