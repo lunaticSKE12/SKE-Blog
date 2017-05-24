@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 						viewHolder.setTitle(model.getTitle());
 						viewHolder.setDesc(model.getDesc());
 						viewHolder.setImage(getApplicationContext(), model.getImage());
-						viewHolder.setUsername(model.getUsername());
+						viewHolder.setUsername("post by " + model.getUsername());
 
 					}
 				};
