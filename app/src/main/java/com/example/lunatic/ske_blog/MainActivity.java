@@ -10,9 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
 	private RecyclerView mBlogList;
 	private DatabaseReference mDatabase;
 	private DatabaseReference mDatabaseUsers;
+	private DatabaseReference mDatabaseLike;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
+	private boolean mProcessLike = false;
 
 	/**
 	 * onCreate is create page view by activity_main
@@ -65,9 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
 		mDatabase = FirebaseDatabase.getInstance().getReference().child("blog");
 		mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+		mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
 
 		mDatabaseUsers.keepSynced(true);
 		mDatabase.keepSynced(true);
+		mDatabaseLike.keepSynced(true);
 
 		mBlogList = (RecyclerView) findViewById(R.id.blog_list);
 		LinearLayoutManager layoutManager =new LinearLayoutManager(this);
@@ -110,10 +114,41 @@ public class MainActivity extends AppCompatActivity {
 						viewHolder.setImage(getApplicationContext(), model.getImage());
 						viewHolder.setUsername("post by " + model.getUsername());
 
-						viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+						/*viewHolder.mView.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
 								Toast.makeText(MainActivity.this, post_key, Toast.LENGTH_LONG).show();
+							}
+						});*/
+
+						// set like button listener
+						viewHolder.mLkieBtn.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								mProcessLike = true;
+
+								if(mProcessLike){
+									mDatabaseLike.addValueEventListener(new ValueEventListener() {
+										@Override
+										public void onDataChange(DataSnapshot dataSnapshot) {
+
+											if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+
+											}else{
+												mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("RandomValue");
+												mProcessLike = false;
+
+											}
+
+
+										}
+
+										@Override
+										public void onCancelled(DatabaseError databaseError) {
+
+										}
+									});
+								}
 							}
 						});
 
@@ -151,11 +186,12 @@ public class MainActivity extends AppCompatActivity {
 
 	/**
 	 * BlogViewHolder set view in blog page
-	 * for use in post card view information.
+	 * for use in post card view infomation.
 	 */
 	public static class BlogViewHolder extends RecyclerView.ViewHolder {
 
 		View mView;
+		ImageButton mLkieBtn;
 
 		//TextView post_title;
 		/**
@@ -166,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
 			super(itemView);
 
 			mView = itemView;
+			mLkieBtn = (ImageButton) mView.findViewById(R.id.likeBtn);
 			/*post_title = (TextView) mView.findViewById(R.id.post_title);
 
 			post_title.setOnClickListener(new View.OnClickListener() {
