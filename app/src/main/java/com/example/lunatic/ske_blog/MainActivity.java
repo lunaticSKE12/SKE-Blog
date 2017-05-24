@@ -7,11 +7,13 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -106,6 +108,13 @@ public class MainActivity extends AppCompatActivity {
 						viewHolder.setImage(getApplicationContext(), model.getImage());
 						viewHolder.setUsername("post by " + model.getUsername());
 
+						viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								Toast.makeText(MainActivity.this, "You Clicked a View", Toast.LENGTH_LONG).show();
+							}
+						});
+
 					}
 				};
 
@@ -145,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
 		View mView;
 
+		TextView post_title;
 		/**
 		 * BlogViewHolder create BlogViewHolder
 		 * @param itemView view item to create
@@ -153,6 +163,15 @@ public class MainActivity extends AppCompatActivity {
 			super(itemView);
 
 			mView = itemView;
+			post_title = (TextView) mView.findViewById(R.id.post_title);
+
+			post_title.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+					Log.v("MainActivity", "some text");
+				}
+			});
 		}
 
 		/**
@@ -161,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 		 */
 		public void setTitle(String title) {
 
-			TextView post_title = (TextView) mView.findViewById(R.id.post_title);
+			//TextView post_title = (TextView) mView.findViewById(R.id.post_title);
 			post_title.setText(title);
 
 		}
