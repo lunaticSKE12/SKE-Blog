@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
 		mAuth.addAuthStateListener(mAuthListener);
 
+		// create FirebaseRecyclerAdapter and set image, title, description, username's post
 		FirebaseRecyclerAdapter<Blog, BlogViewHolder> firebaseRecyclerAdapter =
 				new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
 						Blog.class,
@@ -150,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
 	/**
 	 * BlogViewHolder set view in blog page
+	 * for use in post card view information.
 	 */
 	public static class BlogViewHolder extends RecyclerView.ViewHolder {
 

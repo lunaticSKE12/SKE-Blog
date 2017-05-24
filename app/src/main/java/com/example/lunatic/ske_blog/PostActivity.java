@@ -122,6 +122,7 @@ public class PostActivity extends AppCompatActivity {
 					final DatabaseReference newPost = mDatabase.push();
 
 
+					// send data of post to firebase
 					mDatabaseUser.addValueEventListener(new ValueEventListener() {
 						@Override
 						public void onDataChange(DataSnapshot dataSnapshot) {

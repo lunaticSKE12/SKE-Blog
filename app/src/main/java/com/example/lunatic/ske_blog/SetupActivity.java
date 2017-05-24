@@ -123,6 +123,7 @@ public class SetupActivity extends AppCompatActivity {
 
 			Uri imageUri = data.getData();
 
+			// crop the picture for account
 			CropImage.activity(imageUri)
 					.setGuidelines(CropImageView.Guidelines.ON)
 					.setAspectRatio(1, 1)
@@ -134,6 +135,7 @@ public class SetupActivity extends AppCompatActivity {
 		if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
 			CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
+			// select image to crop
 			if (resultCode == RESULT_OK) {
 
 				mImageUri = result.getUri();
