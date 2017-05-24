@@ -29,26 +29,27 @@ import com.squareup.picasso.Picasso;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mBlogList;
+	private RecyclerView mBlogList;
 	private DatabaseReference mDatabase;
 	private DatabaseReference mDatabaseUsers;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
 
-    /**
-     * onCreate is create page view by activity_main
-     * @param savedInstanceState
-     */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+	/**
+	 * onCreate is create page view by activity_main
+	 *
+	 * @param savedInstanceState
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
 		mAuth = FirebaseAuth.getInstance();
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
 			@Override
 			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-				if(firebaseAuth.getCurrentUser() == null){
+				if (firebaseAuth.getCurrentUser() == null) {
 
 					Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
 					loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -62,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
 		mDatabase = FirebaseDatabase.getInstance().getReference().child("blog");
 		mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
 		mDatabaseUsers.keepSynced(true);
-        mBlogList = (RecyclerView) findViewById(R.id.blog_list);
-        mBlogList.setHasFixedSize(true);
-        mBlogList.setLayoutManager(new LinearLayoutManager(this));
+		mBlogList = (RecyclerView) findViewById(R.id.blog_list);
+		mBlogList.setHasFixedSize(true);
+		mBlogList.setLayoutManager(new LinearLayoutManager(this));
 
 		checkUserExist();
 
@@ -75,60 +76,62 @@ public class MainActivity extends AppCompatActivity {
 	 * onStart set start
 	 */
 	@Override
-    protected void onStart(){
-        super.onStart();
+	protected void onStart() {
+		super.onStart();
 
 
 		mAuth.addAuthStateListener(mAuthListener);
 
 		FirebaseRecyclerAdapter<Blog, BlogViewHolder> firebaseRecyclerAdapter =
-		new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
-				Blog.class,
-				R.layout.blog_row,
-				BlogViewHolder.class,
-				mDatabase
-		) {
-			@Override
-			protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
+				new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
+						Blog.class,
+						R.layout.blog_row,
+						BlogViewHolder.class,
+						mDatabase
+				) {
+					@Override
+					protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
 
-				viewHolder.setTitle(model.getTitle());
-				viewHolder.setDesc(model.getDesc());
-				viewHolder.setImage(getApplicationContext(), model.getImage());
+						viewHolder.setTitle(model.getTitle());
+						viewHolder.setDesc(model.getDesc());
+						viewHolder.setImage(getApplicationContext(), model.getImage());
 
-			}
-		};
+					}
+				};
 
 		mBlogList.setAdapter(firebaseRecyclerAdapter);
 
-    }
+	}
 
 	/**
 	 * checkUserExist check user exist in database
 	 */
 	private void checkUserExist() {
-		final String user_id = mAuth.getCurrentUser().getUid();
-		mDatabaseUsers.addValueEventListener(new ValueEventListener() {
-			@Override
-			public void onDataChange(DataSnapshot dataSnapshot) {
-				if(!dataSnapshot.hasChild(user_id)){
-					Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
-					setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(setupIntent);
+		if (mAuth.getCurrentUser() != null) {
+			final String user_id = mAuth.getCurrentUser().getUid();
+			mDatabaseUsers.addValueEventListener(new ValueEventListener() {
+				@Override
+				public void onDataChange(DataSnapshot dataSnapshot) {
+					if (!dataSnapshot.hasChild(user_id)) {
+						Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+						setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(setupIntent);
+
+					}
+				}
+
+				@Override
+				public void onCancelled(DatabaseError databaseError) {
 
 				}
-			}
-
-			@Override
-			public void onCancelled(DatabaseError databaseError) {
-
-			}
-		});
+			});
+		}
 	}
 
 	/**
 	 * BlogViewHolder set view in blog page
 	 */
-	public static class BlogViewHolder extends RecyclerView.ViewHolder{
+	public static class BlogViewHolder extends RecyclerView.ViewHolder {
 
 		View mView;
 
@@ -138,59 +141,61 @@ public class MainActivity extends AppCompatActivity {
 			mView = itemView;
 		}
 
-		public void setTitle(String title){
+		public void setTitle(String title) {
 
 			TextView post_title = (TextView) mView.findViewById(R.id.post_title);
 			post_title.setText(title);
 
 		}
 
-		public void setDesc(String desc){
+		public void setDesc(String desc) {
 
 			TextView post_desc = (TextView) mView.findViewById(R.id.post_desc);
 			post_desc.setText(desc);
 		}
 
-		public void setImage(Context ctx, String image){
+		public void setImage(Context ctx, String image) {
 			ImageView post_image = (ImageView) mView.findViewById(R.id.post_image);
 			Picasso.with(ctx).load(image).into(post_image);
 		}
 
 	}
 
-    /**
-     * onCreateOptionsMenu set menu icon and action.
-     * @param menu is menu from main_menu.
-     * @return new menu.
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+	/**
+	 * onCreateOptionsMenu set menu icon and action.
+	 *
+	 * @param menu is menu from main_menu.
+	 * @return new menu.
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+		getMenuInflater().inflate(R.menu.main_menu, menu);
 
-        return super.onCreateOptionsMenu(menu);
-    }
+		return super.onCreateOptionsMenu(menu);
+	}
 
-    /**
-     * onOptionsItemSelected set action on add icon
-     * to start new page(new Activity).
-     * @param item is MenuItem.
-     * @return item.
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+	/**
+	 * onOptionsItemSelected set action on add icon
+	 * to start new page(new Activity).
+	 *
+	 * @param item is MenuItem.
+	 * @return item.
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.action_add){
-            startActivity(new Intent(MainActivity.this, PostActivity.class));
-        }
-		if(item.getItemId() == R.id.action_logout){
+		if (item.getItemId() == R.id.action_add) {
+			startActivity(new Intent(MainActivity.this, PostActivity.class));
+		}
+		if (item.getItemId() == R.id.action_logout) {
 			logout();
 		}
 
-        return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
 
-    private void logout(){
+	private void logout() {
 		mAuth.signOut();
 	}
 

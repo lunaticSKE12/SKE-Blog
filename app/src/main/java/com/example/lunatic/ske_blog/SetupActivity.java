@@ -75,6 +75,9 @@ public class SetupActivity extends AppCompatActivity {
 		});
 	}
 
+	/**
+	 * startSetupAccount set up account image and name to database
+	 */
 	private void startSetupAccount() {
 
 		final String name = mNameField.getText().toString().trim();
