@@ -2,9 +2,9 @@ package com.example.lunatic.ske_blog;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
         mBlogList.setHasFixedSize(true);
         mBlogList.setLayoutManager(new LinearLayoutManager(this));
 
-    }
+		checkUserExist();
+
+
+	}
 
 	/**
 	 * onStart set start
@@ -76,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-		checkUserExist();
 
 		mAuth.addAuthStateListener(mAuthListener);
 
