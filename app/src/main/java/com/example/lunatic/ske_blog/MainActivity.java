@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -103,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
 					@Override
 					protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
 
+						final String post_key = getRef(position).getKey();
+
 						viewHolder.setTitle(model.getTitle());
 						viewHolder.setDesc(model.getDesc());
 						viewHolder.setImage(getApplicationContext(), model.getImage());
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 						viewHolder.mView.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								Toast.makeText(MainActivity.this, "You Clicked a View", Toast.LENGTH_LONG).show();
+								Toast.makeText(MainActivity.this, post_key, Toast.LENGTH_LONG).show();
 							}
 						});
 
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
 		View mView;
 
-		TextView post_title;
+		//TextView post_title;
 		/**
 		 * BlogViewHolder create BlogViewHolder
 		 * @param itemView view item to create
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 			super(itemView);
 
 			mView = itemView;
-			post_title = (TextView) mView.findViewById(R.id.post_title);
+			/*post_title = (TextView) mView.findViewById(R.id.post_title);
 
 			post_title.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -171,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
 					Log.v("MainActivity", "some text");
 				}
-			});
+			});*/
 		}
 
 		/**
@@ -180,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 		 */
 		public void setTitle(String title) {
 
-			//TextView post_title = (TextView) mView.findViewById(R.id.post_title);
+			TextView post_title = (TextView) mView.findViewById(R.id.post_title);
 			post_title.setText(title);
 
 		}
