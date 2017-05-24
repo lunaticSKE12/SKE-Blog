@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -135,12 +137,20 @@ public class MainActivity extends AppCompatActivity {
 
 		View mView;
 
+		/**
+		 * BlogViewHolder create BlogViewHolder
+		 * @param itemView view item to create
+		 */
 		public BlogViewHolder(View itemView) {
 			super(itemView);
 
 			mView = itemView;
 		}
 
+		/**
+		 * set title of post
+		 * @param title
+		 */
 		public void setTitle(String title) {
 
 			TextView post_title = (TextView) mView.findViewById(R.id.post_title);
@@ -148,15 +158,36 @@ public class MainActivity extends AppCompatActivity {
 
 		}
 
+		/**
+		 * set description of post
+		 * @param desc
+		 */
 		public void setDesc(String desc) {
 
 			TextView post_desc = (TextView) mView.findViewById(R.id.post_desc);
 			post_desc.setText(desc);
 		}
 
-		public void setImage(Context ctx, String image) {
-			ImageView post_image = (ImageView) mView.findViewById(R.id.post_image);
-			Picasso.with(ctx).load(image).into(post_image);
+		/**
+		 * set image of post
+		 * @param ctx
+		 * @param image
+		 */
+		public void setImage(final Context ctx, final String image) {
+			final ImageView post_image = (ImageView) mView.findViewById(R.id.post_image);
+			//Picasso.with(ctx).load(image).into(post_image);
+			Picasso.with(ctx).load(image).networkPolicy(NetworkPolicy.OFFLINE).into(post_image, new Callback() {
+				@Override
+				public void onSuccess() {
+
+				}
+
+				@Override
+				public void onError() {
+					Picasso.with(ctx).load(image).into(post_image);
+				}
+			});
+
 		}
 
 	}
