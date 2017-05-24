@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 		mDatabaseLike.keepSynced(true);
 
 		mBlogList = (RecyclerView) findViewById(R.id.blog_list);
-		LinearLayoutManager layoutManager =new LinearLayoutManager(this);
+		LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 		layoutManager.setReverseLayout(true);
 		layoutManager.setStackFromEnd(true);
 
@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 						viewHolder.setDesc(model.getDesc());
 						viewHolder.setImage(getApplicationContext(), model.getImage());
 						viewHolder.setUsername("post by " + model.getUsername());
+						viewHolder.setLikeBtn(post_key);
 
 						/*viewHolder.mView.setOnClickListener(new View.OnClickListener() {
 							@Override
@@ -127,29 +128,33 @@ public class MainActivity extends AppCompatActivity {
 							public void onClick(View v) {
 								mProcessLike = true;
 
-								if(mProcessLike){
-									mDatabaseLike.addValueEventListener(new ValueEventListener() {
-										@Override
-										public void onDataChange(DataSnapshot dataSnapshot) {
 
-											if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+								mDatabaseLike.addValueEventListener(new ValueEventListener() {
+									@Override
+									public void onDataChange(DataSnapshot dataSnapshot) {
 
-											}else{
+										if (mProcessLike) {
+											if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
+
+												mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+												mProcessLike = false;
+
+											} else {
 												mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("RandomValue");
 												mProcessLike = false;
 
 											}
-
-
 										}
 
-										@Override
-										public void onCancelled(DatabaseError databaseError) {
+									}
 
-										}
-									});
-								}
+									@Override
+									public void onCancelled(DatabaseError databaseError) {
+
+									}
+								});
 							}
+
 						});
 
 					}
@@ -192,10 +197,14 @@ public class MainActivity extends AppCompatActivity {
 
 		View mView;
 		ImageButton mLkieBtn;
+		DatabaseReference mDatabaseLike;
+		FirebaseAuth mAuth;
 
 		//TextView post_title;
+
 		/**
 		 * BlogViewHolder create BlogViewHolder
+		 *
 		 * @param itemView view item to create
 		 */
 		public BlogViewHolder(View itemView) {
@@ -212,10 +221,39 @@ public class MainActivity extends AppCompatActivity {
 					Log.v("MainActivity", "some text");
 				}
 			});*/
+
+			mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
+			mAuth = FirebaseAuth.getInstance();
+
+			mDatabaseLike.keepSynced(true);
+		}
+
+		public void setLikeBtn(final String post_key){
+
+			mDatabaseLike.addValueEventListener(new ValueEventListener() {
+				@Override
+				public void onDataChange(DataSnapshot dataSnapshot) {
+					if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+
+						mLkieBtn.setImageResource(R.mipmap.ic_thumb_up_blue_24dp);
+
+					}else{
+						mLkieBtn.setImageResource(R.mipmap.ic_thumb_up_gray_24dp);
+
+					}
+
+				}
+
+				@Override
+				public void onCancelled(DatabaseError databaseError) {
+
+				}
+			});
 		}
 
 		/**
 		 * set title of post
+		 *
 		 * @param title
 		 */
 		public void setTitle(String title) {
@@ -227,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
 
 		/**
 		 * set description of post
+		 *
 		 * @param desc
 		 */
 		public void setDesc(String desc) {
@@ -237,9 +276,10 @@ public class MainActivity extends AppCompatActivity {
 
 		/**
 		 * set username of post
+		 *
 		 * @param username
 		 */
-		public void setUsername(String username){
+		public void setUsername(String username) {
 			TextView post_usename = (TextView) mView.findViewById(R.id.post_username);
 			post_usename.setText(username);
 
@@ -247,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
 
 		/**
 		 * set image of post
+		 *
 		 * @param ctx
 		 * @param image
 		 */
