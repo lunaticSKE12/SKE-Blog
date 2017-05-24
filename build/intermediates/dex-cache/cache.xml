@@ -147,6 +147,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\Lunatic\.android\build-cache\f7ecdf7bf09a2c1d3cb367b7fbfed8ee590c401a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="61d731cf60fb232cc0687bdec50600e87b5502de">
+        <dex dex="C:\Users\Lunatic\SKE-Blog\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_daf11fd3478edf2b7cac4ddcd979bcc9a0e99f65\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\Lunatic\.android\build-cache\f4e8004e3ce433d0b277ed3a920a40c7f2e62b87\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -196,7 +205,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="0b96a3421260fd2eda8ef2edd853aa1b49f7bd91">
+        sha1="1c404e03c450151c66c20fd0a95c3b83d14f2108">
         <dex dex="C:\Users\Lunatic\SKE-Blog\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_d1cad5f69e16e9da878cd2c20bd7f9b35f24ee36\classes.dex" />
     </item>
     <item
@@ -288,6 +297,15 @@
         revision="25.0.2"
         sha1="cea6fccbfe2b9ca7701a8766710179cd41ae1974">
         <dex dex="C:\Users\Lunatic\SKE-Blog\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e4a7aa6f63a88f68da53387e4d5ae78c8ecb6107\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Lunatic\.android\build-cache\33423112a99ef9929cc21be1ee8668fa1dbac86d\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6bd32b72098fecf44dcab3808a11e6b9fcb86b7b">
+        <dex dex="C:\Users\Lunatic\SKE-Blog\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_92d5b22023ebc3e0b2f5b67b6b4283e1acd55c51\classes.dex" />
     </item>
     <item
         is-multidex="true"
