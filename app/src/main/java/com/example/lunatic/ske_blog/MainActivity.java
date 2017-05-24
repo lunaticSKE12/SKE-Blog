@@ -44,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
 			@Override
 			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+				if(firebaseAuth.getCurrentUser() == null){
+
+					Intent loginIntent = new Intent(MainActivity.this, RegisterActivity.class);
+					loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(loginIntent);
+
+				}
 
 			}
 		};
@@ -58,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+
+		mAuth.addAuthStateListener(mAuthListener);
 
 		FirebaseRecyclerAdapter<Blog, BlogViewHolder> firebaseRecyclerAdapter =
 		new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
@@ -135,7 +144,15 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.action_add){
             startActivity(new Intent(MainActivity.this, PostActivity.class));
         }
+		if(item.getItemId() == R.id.action_logout){
+			logout();
+		}
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void logout(){
+		mAuth.signOut();
+	}
+
 }
