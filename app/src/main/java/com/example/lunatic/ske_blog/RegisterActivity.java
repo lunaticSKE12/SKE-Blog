@@ -4,14 +4,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -72,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
 	private void startRegister() {
 		final String  name = mNameField.getText().toString().trim();
 		String email = mEmailField.getText().toString().trim();
-		String password = mPasswordField.getText().toString().trim();
+		final String password = mPasswordField.getText().toString().trim();
 
 		if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
 
@@ -91,20 +90,32 @@ public class RegisterActivity extends AppCompatActivity {
 
 						mProgress.dismiss();
 
-						Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
-						mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(mainIntent);
+						Intent setupIntent = new Intent(RegisterActivity.this, SetupActivity.class);
+						setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(setupIntent);
 
-					}else{
+					}else if (password.length() < 6){
 						new AlertDialog.Builder(RegisterActivity.this)
 								.setTitle("Alert")
-								.setMessage("This username might be already exist please change your name and email or not an email.")
+								.setMessage("Your email is not correct or password less than 6 character")
 								.setCancelable(false).setPositiveButton("ok", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								mProgress.dismiss();
 							}
 						}).show();
+					}
+					else {
+						new AlertDialog.Builder(RegisterActivity.this)
+								.setTitle("Alert")
+								.setMessage("This username might be already exist please change your name and email or email incorrect")
+								.setCancelable(false).setPositiveButton("ok", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								mProgress.dismiss();
+							}
+						}).show();
+
 					}
 
 				}
