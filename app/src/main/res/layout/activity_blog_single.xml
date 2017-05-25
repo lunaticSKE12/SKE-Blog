@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
-                android:text="Button"
+                android:text="Remove post"
                 android:visibility="invisible"
                 tools:layout_editor_absoluteX="132dp"
                 tools:layout_editor_absoluteY="447dp"/>

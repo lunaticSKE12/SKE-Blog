@@ -19,9 +19,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/BlogSingleActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/BlogSingleActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/RegisterActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/RegisterActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_blog_single.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_blog_single.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" />
     </list>
     <ignored path="SKE-Blog.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -90,9 +88,12 @@
       <file leaf-file-name="BlogSingleActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/BlogSingleActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="961">
-              <caret line="56" column="63" selection-start-line="56" selection-start-column="63" selection-end-line="56" selection-end-column="63" />
-              <folding />
+            <state relative-caret-position="1321">
+              <caret line="77" column="40" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
+              <folding>
+                <element signature="e#2448#2691#0" expanded="true" />
+                <element signature="e#2690#2691#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2593,9 +2594,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/SetupActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/blog_row.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_blog_single.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/RegisterActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_blog_single.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/BlogSingleActivity.java" />
       </list>
     </option>
@@ -3688,17 +3689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_post.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="3720">
-          <caret line="93" column="13" selection-start-line="93" selection-start-column="13" selection-end-line="93" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/blog_row.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -3783,11 +3773,25 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_post.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="3720">
+          <caret line="93" column="13" selection-start-line="93" selection-start-column="13" selection-end-line="93" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/lunatic/ske_blog/BlogSingleActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="961">
-          <caret line="56" column="63" selection-start-line="56" selection-start-column="63" selection-end-line="56" selection-end-column="63" />
-          <folding />
+        <state relative-caret-position="1321">
+          <caret line="77" column="40" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
+          <folding>
+            <element signature="e#2448#2691#0" expanded="true" />
+            <element signature="e#2690#2691#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
