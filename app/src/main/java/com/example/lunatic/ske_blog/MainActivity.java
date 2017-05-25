@@ -76,10 +76,11 @@ public class MainActivity extends AppCompatActivity {
 		mBlogList = (RecyclerView) findViewById(R.id.blog_list);
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 		layoutManager.setReverseLayout(true);
-		layoutManager.setStackFromEnd(true);
+		//layoutManager.setStackFromEnd(true);
 
 		mBlogList.setHasFixedSize(true);
 		mBlogList.setLayoutManager(new LinearLayoutManager(this));
+
 
 		checkUserExist();
 
