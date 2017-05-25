@@ -12,4 +12,24 @@ simple blog to post and read other post use firebase to store username and post 
 
 ## interface
 
-![alt](https://drive.google.com/file/d/0B5G0LrsWxDjJdzdUUkZKMVdsWUE/view?usp=sharing)
+
+<a href="https://www.uppic.org/share-71BC_59271869.html"><img src="https://www.uppic.org/thumb-71BC_59271869.jpg" border="0"></a>
+
+<a href="https://www.uppic.org/share-122A_59271869.html"><img src="https://www.uppic.org/thumb-122A_59271869.jpg" border="0"></a>
+
+<a href="https://www.uppic.org/share-E13B_59271869.html"><img src="https://www.uppic.org/thumb-E13B_59271869.jpg" border="0"></a>
+
+<a href="https://www.uppic.org/share-8C71_59271869.html"><img src="https://www.uppic.org/thumb-8C71_59271869.jpg" border="0"></a>
+
+<a href="https://www.uppic.org/share-B2F0_59271869.html"><img src="https://www.uppic.org/thumb-B2F0_59271869.jpg" border="0"></a>
+
+
+## Installation
+
+use android studio emulator or android emulator of android phone
+
+- link : [Get it here!](https://drive.google.com/file/d/0B5G0LrsWxDjJT0hCZjF4b21feG8/view?usp=sharing)
+
+## Develop by
+
+Napong Dungduangsasitorn
